@@ -16,16 +16,7 @@
         .w3-sidebar {width: 120px;background: #222;}
         /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
         #main {margin-left: 120px}
-        /* Remove margins from "page content" on small screens */
-        @media only screen and (max-width: 600px) {#main {margin-left: 0}}
-        
-        .profile-image {
-        border-radius: 50%; /* Makes the image circular */
-        object-fit: cover; /* Ensures the image covers the area without distortion */
-        width: 100%; /* Ensures the image takes the full width of its container */
-        height: auto; /* Maintains the aspect ratio */
-    }
-
+      
     
     /* Navbar on small screens (Hidden on medium and large screens) */
     .w3-top.w3-hide-large.w3-hide-medium {
@@ -44,27 +35,30 @@
         padding: 10px 0; /* Add padding for better touch targets */
     }
 
-    /* Add this CSS to your existing styles */
-   @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 600px) {
+    header {
+        display: flex; /* Use flexbox for layout */
+        flex-direction: column; /* Stack items vertically */
+        align-items: center; /* Center items horizontally */
+        text-align: center; /* Center text */
+    }
+
     .profile-image {
         margin-top: 20px; /* Add margin to the top of the profile image */
         width: 130%; /* Increase the width by 60% */
         max-width: 360px; /* Set a maximum width to prevent it from being too large */
     }
 
-    header {
-        margin-top: 20px; /* Add margin to the header */
-    }
-
     h1.w3-jumbo {
         font-size: 2.5em; /* Adjust font size for better visibility */
+        margin-top: 20px; /* Add margin to separate from the image */
     }
 
     h3 {
         font-size: 1.5em; /* Adjust font size for better visibility */
+        margin-top: 10px; /* Add margin to separate from the name */
     }
 }
-
         /* Animation styles */
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(20px); }
@@ -257,8 +251,6 @@
         </div>
     </div>
 </header>
-    
-    
 <!-- About Section -->
 <div class="w3-content w3-justify w3-text-grey w3-padding-64 section" id="about">
     <h2 class="w3-text-light-grey">About Me</h2>
