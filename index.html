@@ -45,15 +45,25 @@
     }
 
     /* Add this CSS to your existing styles */
-    @media only screen and (max-width: 600px) {
-        .profile-image {
-            margin-top: 20px; /* Add margin to the top of the profile image */
-        }
-
-        header {
-            margin-top: 20px; /* Alternatively, you can add margin to the header */
-        }
+   @media only screen and (max-width: 600px) {
+    .profile-image {
+        margin-top: 20px; /* Add margin to the top of the profile image */
+        width: 130%; /* Increase the width by 60% */
+        max-width: 360px; /* Set a maximum width to prevent it from being too large */
     }
+
+    header {
+        margin-top: 20px; /* Add margin to the header */
+    }
+
+    h1.w3-jumbo {
+        font-size: 2.5em; /* Adjust font size for better visibility */
+    }
+
+    h3 {
+        font-size: 1.5em; /* Adjust font size for better visibility */
+    }
+}
 
         /* Animation styles */
         @keyframes fadeIn {
