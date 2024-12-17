@@ -1,12 +1,599 @@
+<!DOCTYPE html>
 <html>
 <head>
-<title>
-My Portfolio
-</title>
+    <title>My Portfolio</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+        .w3-row-padding img {margin-bottom: 12px}
+        /* Set the width of the sidebar to 120px */
+        .w3-sidebar {width: 120px;background: #222;}
+        /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
+        #main {margin-left: 120px}
+        /* Remove margins from "page content" on small screens */
+        @media only screen and (max-width: 600px) {#main {margin-left: 0}}
+        
+        .profile-image {
+        border-radius: 50%; /* Makes the image circular */
+        object-fit: cover; /* Ensures the image covers the area without distortion */
+        width: 100%; /* Ensures the image takes the full width of its container */
+        height: auto; /* Maintains the aspect ratio */
+    }
+
+    
+    /* Navbar on small screens (Hidden on medium and large screens) */
+    .w3-top.w3-hide-large.w3-hide-medium {
+        display: flex; /* Use flexbox for alignment */
+        justify-content: space-around; /* Space items evenly */
+        width: 100%; /* Full width */
+    }
+
+    .w3-bar.w3-black {
+        flex-wrap: wrap; /* Allow items to wrap */
+    }
+
+    .w3-bar-item {
+        flex: 1; /* Make each item take equal space */
+        text-align: center; /* Center text */
+        padding: 10px 0; /* Add padding for better touch targets */
+    }
+
+    /* Add this CSS to your existing styles */
+    @media only screen and (max-width: 600px) {
+        .profile-image {
+            margin-top: 20px; /* Add margin to the top of the profile image */
+        }
+
+        header {
+            margin-top: 20px; /* Alternatively, you can add margin to the header */
+        }
+    }
+
+        /* Animation styles */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(20px); }
+        }
+
+        .section {
+            opacity: 0; /* Start hidden */
+            transition: opacity 0.9s ease-in-out;
+        }
+
+        .section.visible {
+            opacity: 1; /* Show when visible */
+            animation: fadeIn 0.9s forwards; /* Fade in animation */
+        }
+
+        .section.hidden {
+            animation: fadeOut 0.9s forwards; /* Fade out animation */
+        }
+
+        .skill-column {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+        display: none; /* Initially hide all columns */
+    }
+
+    .skill-column.visible {
+        opacity: 1;
+        transform: translateY(0);
+        display: block; /* Show the visible column */
+    }
+
+    .arrow {
+        font-size: 30px; /* Adjust size of arrows */
+        cursor: pointer;
+        padding: 10px;
+        color: #fff; /* Change color to match your theme */
+        transition: color 0.3s;
+    }
+
+    .arrow:hover {
+        color: #f1f1f1; /* Change color on hover */
+    }
+
+    .w3-center {
+        position: relative;
+    }
+
+    .left-arrow {
+        position: absolute;
+        left: 0;
+    }
+
+    .right-arrow {
+        position: absolute;
+        right: 0;
+    }
+
+    .text-adjust {
+    margin-top: 20px; /* Adjust this value to move the text down */
+}
+
+/* Media query for small screens */
+@media only screen and (max-width: 600px) {
+    #main {
+        margin-left: 0; /* Remove left margin for small screens */
+    }
+
+    .w3-col {
+        width: 100%; /* Make columns full width */
+        margin-bottom: 20px; /* Add some space between sections */
+    }
+
+    .slideshow-container {
+        width: 100%; /* Ensure slideshow takes full width */
+    }
+
+    .mySlides img {
+        width: 100%; /* Ensure images in slideshows are responsive */
+    }
+
+    .text-adjust {
+        margin-top: 10px; /* Adjust this value for smaller screens */
+    }
+}
+
+
+.slideshow-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+}
+
+.mySlides {
+    display: none;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+    </style>
 </head>
-<body>
-<center>
-<h1>This Is My Website</h1>
-</center>
+<body class="w3-black">
+
+<!-- Sidebar -->
+<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+    <!-- Avatar image in top left corner -->
+    <img src="Profile.jpeg" style="width:100%">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-black">
+        <i class="fa fa-home w3-xxlarge"></i>
+        <p>HOME</p>
+    </a>
+    <a href="#about" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+        <i class="fa fa-user w3-xxlarge"></i>
+        <p>ABOUT</p>
+    </a>
+    <a href="#projects" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+        <i class="fa fa-briefcase w3-xxlarge"></i>
+        <p>PROJECTS</p>
+    </a>
+    <a href="#internships" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+        <i class="fa fa-briefcase w3-xxlarge"></i>
+        <p>INTERNSHIPS</p>
+    </a>
+    <a href="#certifications" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+        <i class="fa fa-certificate w3-xxlarge"></i>
+        <p>CERTIFICATIONS</p>
+    </a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+        <i class="fa fa-envelope w3-xxlarge"></i>
+        <p>CONTACT</p>
+    </a>
+</nav>
+
+<!-- Navbar on small screens (Hidden on medium and large screens) -->
+<div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
+    <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
+        <a href="#" class="w3-bar-item w3-button">HOME</a>
+        <a href="#about" class="w3-bar-item w3-button">ABOUT</a>
+        <a href="#projects" class="w3-bar-item w3-button">PROJECTS</a>
+        <a href="#internships" class="w3-bar-item w3-button">INTERNSHIPS</a>
+        <a href="#certifications" class="w3-bar-item w3-button">CERTIFICATIONS</a>
+        <a href="#contact" class="w3-bar-item w3-button">CONTACT</a>
+    </div>
+</div>
+<!-- Page Content -->
+<div class="w3-padding-large" id="main">
+    <!-- Header/Home -->
+   <!-- Header/Home -->
+<!-- Header/Home -->
+<header class="w3-container w3-padding-32 w3-center w3-black section" id="home">
+    <div class="w3-row">
+        <div class="w3-col s8">
+            <h1 class="w3-jumbo text-adjust"><span class="w3-hide-small">I'm</span> Bharath Chelimalla.</h1>
+            <p class="text-adjust"><h3>Passionate About Web Development, AI, and Machine Learning.</h3></p>
+            <a href="BharathResume.pdf">
+                <button class="w3-button w3-light-grey w3-padding-large w3-section">
+                    <i class="fa fa-download"></i> Download Resume
+                </button>
+            </a>
+        </div>
+        <div class="w3-col s4">
+            <img src="Profile.jpeg" alt="Avatar" class="w3-image profile-image" style="width:80%; max-width:300px;">
+        </div>
+    </div>
+</header>
+    
+    
+<!-- About Section -->
+<div class="w3-content w3-justify w3-text-grey w3-padding-64 section" id="about">
+    <h2 class="w3-text-light-grey">About Me</h2>
+    <hr style="width:200px" class="w3-opacity">
+    <p>Hello, I'm Bharath Chelimalla – A Final-Year CSE Student and Passionate Tech Enthusiast
+
+        Welcome to my portfolio! I am a Computer Science Engineering student with a deep passion for Web Development, Artificial Intelligence, and Machine Learning. My journey in technology has been driven by a desire to create innovative solutions and contribute to impactful projects.
+        
+        Over the years, I have honed my skills in programming languages like Python, C, and Java and mastered frameworks such as TensorFlow, PyTorch, and Scikit-learn. My experience spans a variety of domains, including Natural Language Processing (NLP), Computer Vision, and Database Management.</p>
+    
+    <h3 class="w3-padding-16 w3-text-light-grey">Skills</h3>
+    
+    <div class="w3-row" id="skills-container">
+        <div class="w3-col m6 skill-column visible">
+            <h4>Programming Languages</h4>
+            <ul>
+                <li>Python</li>
+                <li>Java</li>
+                <li>C</li>
+                <li>SQL</li>
+            </ul>
+        </div>
+        <div class="w3-col m6 skill-column visible">
+            <h4>Web Development</h4>
+            <ul>
+                <li>HTML</li>
+                <li>CSS</li>
+                <li>JavaScript</li>
+                <li>React</li>
+            </ul>
+        </div>
+        <div class="w3-col m6 skill-column">
+            <h4>Machine Learning</h4>
+            <ul>
+                <li>TensorFlow</li>
+                <li>PyTorch</li>
+                <li>Scikit-learn</li>
+                <li>Natural Language Processing</li>
+            </ul>
+        </div>
+        <div class="w3-col m6 skill-column">
+            <h4>Development and Text Editors</h4>
+            <ul>
+                <li>Visual Studio Code</li>
+                <li>Jupyter Notebook</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="w3-center">
+        <span class="arrow left-arrow" id="prevBtn">&#10094;</span>
+        <span class="arrow right-arrow" id="nextBtn">&#10095;</span>
+    </div>
+
+    
+</div>
+
+
+        <!-- Projects Section -->
+<div class="w3-padding-64 w3-content section" id="projects">
+    <h2 class="w3-text-light-grey">Projects</h2>
+    <hr style="width:200px" class="w3-opacity">
+
+    <!-- Grid for projects -->
+    <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-col s12 m6">
+            <div class="slideshow-container" id="project1">
+                <div class="mySlides fade">
+                    <img src="Sign1.jpeg" style="width:100%">
+                </div>
+                <div class="mySlides fade">
+                    <img src="Sign2.jpeg" style="width:100%">
+                </div>
+                <a class="prev" onclick="plusSlides(-1, 'project1')">&#10094;</a>
+                <a class="next" onclick="plusSlides(1, 'project1')">&#10095;</a>
+            </div>
+            <p align="center">Sign Language Recognition</p>
+            <p>This project uses MediaPipe for hand landmark detection and TensorFlow/Keras to train a neural network for real-time hand sign recognition. With over 90% accuracy and <100ms latency, it ensures seamless interaction via a standard webcam.</p>
+        </div>
+
+        <div class="w3-col s12 m6">
+            <div class="slideshow-container" id="project2">
+                <div class="mySlides fade">
+                    <img src="fr1.png" style="width:100%">
+                </div>
+                <div class="mySlides fade">
+                    <img src="fr2.png" style="width:100%">
+                </div>
+                <a class="prev" onclick="plusSlides(-1, 'project2')">&#10094;</a>
+                <a class="next" onclick="plusSlides(1, 'project2')">&#10095;</a>
+            </div>
+            <p align="center">Leveraging Machine Learning Techniques for enhanced Fraud Detection in Banking Systems</p>
+            <p>This project involves building a machine learning model to detect credit card fraud in an imbalanced dataset of 284,807 transactions. Using algorithms like Logistic Regression, LightGBM, XGBoost, and ANN, along with Bayesian Optimization, a Voting Classifier achieved over 99% accuracy. The model, deployed with Streamlit, provides real-time fraud detection for banking systems.</p>
+        </div>
+
+        <div class="w3-col s12 m6">
+            <div class="slideshow-container" id="project3">
+                <div class="mySlides fade">
+                    <img src="french1.png" style="width:100%">
+                </div>
+                <div class="mySlides fade">
+                    <img src="french2.png" style="width:100%">
+                </div>
+                <a class="prev" onclick="plusSlides(-1, 'project3')">&#10094;</a>
+                <a class="next" onclick="plusSlides(1, 'project3')">&#10095;</a>
+            </div>
+            <p align="center">French Tourism Website</p>
+            <p>I created a dynamic and responsive French tourism website using HTML, CSS, and JavaScript. The site features interactive elements like expandable content and card displays, which increased user engagement by 15-20%. It offers a seamless experience across devices, providing users with detailed information about French tourist destinations in an engaging and visually appealing way.</p>
+        </div>
+
+        <div class="w3-col s12 m6">
+            <div class="slideshow-container" id="project4">
+                <div class="mySlides fade">
+                    <img src="blog2.png" style="width:100%">
+                </div>
+                <div class="mySlides fade">
+                    <img src="blog1 (1).png" style="width:100%">
+                </div>
+                <a class="prev" onclick="plusSlides(-1, 'project4')">&#10094;</a>
+                <a class="next" onclick="plusSlides(1, 'project4')">&#10095;</a>
+            </div>
+            <p align="center">Blog Website</p>
+            <p>The interactive blog website, built with HTML, CSS, and JavaScript, allows users to create, edit, delete, and comment on posts with data saved using local storage. It features pagination for easy navigation and a responsive design for compatibility across devices. This application is ideal for personal blogging with scope for future enhancements like search and user authentication.</p>
+        </div>
+    </div>
+</div>
+  
+
+<!-- Internships Section -->
+<div class="w3-padding-64 w3-content section" id="internships">
+    <h2 class="w3-text-light-grey">Internships</h2>
+    <hr style="width:200px" class="w3-opacity">
+
+    <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-col s12 m6">
+            <h3>Machine Learning Intern at Campalin Innovation</h3>
+            <p>Duration: 2 months</p>
+            <p>May 2023 – June 2023</p>
+           <p>Applied strong analytical and technical skills, driving successful outcomes and advancing predictive analytics capabilities.</p> </div>
+
+        <div class="w3-col s12 m6">
+            <h3>AIML Internship offered by Google Developers AICTE</h3>
+            <p>Duration: 2 months</p>
+            <p>April 2024 – June 2024</p>
+            <p>Utilized advanced Python libraries such as TensorFlow and scikit-learn to optimize data models for 
+                predictive analytics.</p>
+        </div>
+
+        <div class="w3-col s12 m6">
+            <h3>Web Development Intern at CodSoft</h3>
+            <p>Duration: 1 month</p>
+            <p>July 2024 – August 2024</p>
+            <p>Designed a dynamic landing page with interactive features, boosting engagement by 10-15%, and created a responsive portfolio website optimized for mobile and tablet users.</p>
+        </div>
+
+        <div class="w3-col s12 m6">
+            <h3>Front-End Development Intern at Skillbit Technologies</h3>
+            <p>Duration: 1 month</p>
+            <p>November 2024 – December 2024</p>
+            <p>During my internship, I built an interactive blog and a to-do list app with features like content management, task filtering, and responsive design using localStorage.</p>
+        </div>
+    </div>
+</div>
+   
+
+
+<!-- Certifications Section -->
+<div class="w3-padding-64 w3-content section" id="certifications">
+    <h2 class="w3-text-light-grey">Certifications</h2>
+    <hr style="width:200px" class="w3-opacity">
+
+    <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-col s12 m6">
+            <h3>Database Management Systems</h3>
+            <p>NPTEL</p>
+        </div>
+        <div class="w3-col s12 m6">
+            <h3>Machine Learning with Python</h3>
+            <p>Campalin Innovations</p>
+        </div>
+        <div class="w3-col s12 m6">
+            <h3>Web Development</h3>
+            <p>CodSoft</p>
+        </div>
+        <div class="w3-col s12 m6">
+            <h3>Artificial Intelligence and Machine Learning</h3>
+            <p>Google-AICTE-EduSkills</p>
+        </div>
+        <div class="w3-col s12 m6">
+            <h3>Natural Language Processing Specialization</h3>
+            <p>DeepLearning.AI</p>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Section -->
+<div class="w3-padding-64 w3-content w3-text-grey section" id="contact">
+    <h2 class="w3-text-light-grey">Contact Me</h2>
+    <hr style="width:200px" class="w3-opacity">
+
+    <div class="w3-row-padding" style="margin:0 -16px">
+        <div class="w3-col s12 m6">
+            <div class="w3-section">
+                <p><i class="fa fa-map-marker fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Warangal, Telangana</p>
+                <p><i class="fa fa-phone fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Phone: 8309281410</p>
+                <p><i class="fa fa-envelope fa-fw w3-text-white w3-xxlarge w3-margin-right"></i> Email: chbharath0779@gmail.com</p>
+            </div>        
+        </div>
+
+        <div class="w3-col s12 m6">
+            <h3 class="w3-text-light-grey">Connect with Me</h3>
+            <div class="w3-section">
+                <a href="https://www.instagram.com/bharath_891/" class="w3-button w3-light-grey w3-margin-bottom"><i class="fa fa-instagram"></i> Instagram</a>
+                <a href="https://github.com/bittubunny" class="w3-button w3-light-grey w3-margin-bottom"><i class="fa fa-github"></i> GitHub</a>
+                <a href="https://www.linkedin.com/in/bharath-chelimalla-82611627a/" class="w3-button w3-light-grey w3-margin-bottom"><i class="fa fa-linkedin"></i> LinkedIn</a>
+                <a href="https://www.facebook.com/profile.php?id=61569867812021" class="w3-button w3-light-grey w3-margin-bottom"><i class="fa fa-facebook"></i> Facebook</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+    <!-- Footer -->
+    <footer class="w3-content w3-padding-32 w3-text-grey w3-xlarge">
+        <a href="https://www.instagram.com/bharath_891/"><i class="fa fa-instagram w3-hover-opacity"></i></a>
+        <a href="https://github.com/bittubunny"><i class="fa fa-github w3-hover-opacity"></i></a>
+        <a href="https://www.linkedin.com/in/bharath-chelimalla-82611627a/"><i class="fa fa-linkedin w3-hover-opacity"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61569867812021"><i class="fa fa-facebook w3-hover-opacity"></i></a>
+        <p class="w3-medium">Powered by <a href="https://www.linkedin.com/in/bharath-chelimalla-82611627a/" target="_blank" class="w3-hover-text-green">Bharath Chelimalla</a></p>
+    </footer>
+
+    <!-- END PAGE CONTENT -->
+</div>
+
+<script>
+    function sendEmail(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Get form values
+    const name = document.querySelector('input[name="Name"]').value;
+    const email = document.querySelector('input[name="Email"]').value;
+    const subject = document.querySelector('input[name="Subject"]').value;
+    const message = document.querySelector('textarea[name="Message"]').value;
+
+    // Construct the mailto link
+    const mailtoLink = `mailto:your_email@example.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`From: ${name} <${email}>\n\n${message}`)}`;
+
+    // Open the default email client
+    window.location.href = mailtoLink;
+}
+    // Function to add/remove visibility classes based on intersection
+    document.addEventListener("DOMContentLoaded", function () {
+        const sections = document.querySelectorAll(".section");
+
+        const observerOptions = {
+            root: null, // Observes within the viewport
+            rootMargin: "0px",
+            threshold: 0.2, // 10% of the section should be visible to trigger
+        };
+
+        const observerCallback = (entries, observer) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    entry.target.classList.remove("hidden");
+                } else {
+                    entry.target.classList.remove("visible");
+                    entry.target.classList.add("hidden");
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+        sections.forEach((section) => {
+            observer.observe(section);
+        });
+    });
+
+
+    let currentIndex = 0;
+    const skillColumns = document.querySelectorAll('.skill-column');
+
+    function showColumns(startIndex) {
+        // Hide all columns
+        skillColumns.forEach((column) => column.classList.remove('visible'));
+
+        // Show the specified columns
+        skillColumns[startIndex].classList.add('visible');
+        if (startIndex + 1 < skillColumns.length) {
+            skillColumns[startIndex + 1].classList.add('visible');
+        }
+    }
+
+    function showNextColumns() {
+        currentIndex = (currentIndex + 2) % skillColumns.length;
+        showColumns (currentIndex);
+    }
+
+    function showPrevColumns() {
+        currentIndex = (currentIndex - 2 + skillColumns.length) % skillColumns.length;
+        showColumns(currentIndex);
+    }
+
+    // Show the first two columns initially
+    showColumns(currentIndex);
+
+    // Event listeners for arrow symbols
+    document.getElementById('nextBtn').addEventListener('click', showNextColumns);
+    document.getElementById('prevBtn').addEventListener('click', showPrevColumns);
+
+    // Optional: Auto-slide every 3 seconds
+    setInterval(showNextColumns, 3000);
+
+
+    let slideIndices = {
+    project1: 1,
+    project2: 1,
+    project3: 1,
+    project4: 1
+};
+
+function showSlides(n, projectId) {
+    let i;
+    let slides = document.querySelectorAll(`#${projectId} .mySlides`);
+    if (n > slides.length) { slideIndices[projectId] = 1 }
+    if (n < 1) { slideIndices[projectId] = slides.length }
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    slides[slideIndices[projectId] - 1].style.display = "block";  
+}
+
+function plusSlides(n, projectId) {
+    showSlides(slideIndices[projectId] += n, projectId);
+}
+
+// Initialize the slideshows
+showSlides(slideIndices.project1, 'project1');
+showSlides(slideIndices.project2, 'project2');
+showSlides(slideIndices.project3, 'project3');
+showSlides(slideIndices.project4, 'project4');
+
+</script>
+
 </body>
 </html>
