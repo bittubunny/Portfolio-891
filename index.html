@@ -35,7 +35,14 @@
         padding: 10px 0; /* Add padding for better touch targets */
     }
 
-   @media only screen and (max-width: 600px) {
+  .profile-image {
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image covers the area without distortion */
+    width: 80%; /* Default width */
+    max-width: 300px; /* Default max width */
+}
+
+@media only screen and (max-width: 600px) {
     header {
         display: flex; /* Use flexbox for layout */
         flex-direction: column; /* Stack items vertically */
@@ -47,6 +54,7 @@
         margin-top: 20px; /* Add margin to the top of the profile image */
         width: 150%; /* Increase the width by 50% */
         max-width: 400px; /* Set a maximum width to prevent it from being too large */
+        border-radius: 50%; /* Ensure the image is circular */
     }
 
     h1.w3-jumbo {
