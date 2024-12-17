@@ -35,7 +35,7 @@
         padding: 10px 0; /* Add padding for better touch targets */
     }
 
-    @media only screen and (max-width: 600px) {
+   @media only screen and (max-width: 600px) {
     header {
         display: flex; /* Use flexbox for layout */
         flex-direction: column; /* Stack items vertically */
@@ -45,8 +45,8 @@
 
     .profile-image {
         margin-top: 20px; /* Add margin to the top of the profile image */
-        width: 130%; /* Increase the width by 60% */
-        max-width: 360px; /* Set a maximum width to prevent it from being too large */
+        width: 150%; /* Increase the width by 50% */
+        max-width: 400px; /* Set a maximum width to prevent it from being too large */
     }
 
     h1.w3-jumbo {
@@ -237,7 +237,10 @@
 <!-- Header/Home -->
 <header class="w3-container w3-padding-32 w3-center w3-black section" id="home">
     <div class="w3-row">
-        <div class="w3-col s8">
+        <div class="w3-col s12">
+            <img src="Profile.jpeg" alt="Avatar" class="w3-image profile-image" style="width:80%; max-width:300px;">
+        </div>
+        <div class="w3-col s12">
             <h1 class="w3-jumbo text-adjust"><span class="w3-hide-small">I'm</span> Bharath Chelimalla.</h1>
             <p class="text-adjust"><h3>Passionate About Web Development, AI, and Machine Learning.</h3></p>
             <a href="BharathResume.pdf">
@@ -245,9 +248,6 @@
                     <i class="fa fa-download"></i> Download Resume
                 </button>
             </a>
-        </div>
-        <div class="w3-col s4">
-            <img src="Profile.jpeg" alt="Avatar" class="w3-image profile-image" style="width:80%; max-width:300px;">
         </div>
     </div>
 </header>
